@@ -15,7 +15,7 @@ int array[S][S];
 
 int main(){
 	grafOlustur();
-	//print(array);
+	print(array);
 	optimalYolBul(array, 0);
 	return 0;
 }
