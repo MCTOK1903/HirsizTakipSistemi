@@ -61,7 +61,6 @@ void print(int array[11][11]){
 
 
 void optimalYolBul(int graph[S][S] , int src){
-	
     int dist[S];
 	bool sptSet[S];
 	for (int i=0 ; i<S;i++){
@@ -71,32 +70,33 @@ void optimalYolBul(int graph[S][S] , int src){
 
 	dist[src]=0;
 
-	for(int count=0;count<S;count++){
+	for(int count=0;count<S-1;count++){
 		int u = minDistance(dist,sptSet);
 		sptSet[u]=true;
         
 		
 		for(int t = 0; t < S; t++)
-		{
-			if(!sptSet[t] && graph[u][t] && dist[u] != __INT_MAX__
-				&& dist[u]+graph[u][t]< dist[t] ){
+		    if(!sptSet[t] && graph[u][t] && dist[u] != __INT_MAX__
+				&& dist[u]+graph[u][t] < dist[t] )
 					dist[t] = dist[u] + graph[u][t];
-                    cout<<t<<"->"<<dist[t]<<endl;
-			}
-			//printSolution(dist ,S);
-		}
+                    //cout<<"dist"<<"["<<u<<"]"<<dist[u]<<endl;
+                    //cout<<"graph"<<"["<<u<<"]"<<"["<<t<<"]"<<graph[u][t]<<endl;
+                    //cout<<t<<"->"<<dist[t]<<endl;
+            
+			
+		
 		
 	}
-
+    printSolution(dist ,S);
 
 }
 
 void printSolution(int dist[], int n){
 	cout<<"Dugümlerin ana kaynağa olna uzakığı"<<endl;
 	
-	for(int i = 0; i < n; i++)
+	for(int i = 0; i < 11; i++)
 	{
-		cout<<" "<<i<<dist[i]<<endl;
+		cout<<i<<".Düğüm"<<dist[i]<<endl;
 	}
 	
 }
@@ -110,7 +110,9 @@ int minDistance(int dist[],bool sptSet[]) {
 	{
 		if(sptSet[i]==false && dist[i] <= min){
 			min=dist[i];
-			minIndex=i;	
+            
+			minIndex=i;
+            //cout<<minIndex<<endl;	
 		}
 	}
     return minIndex;
