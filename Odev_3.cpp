@@ -9,13 +9,13 @@ using namespace std;
 void grafOlustur();
 void optimalYolBul(int graph[S][S] , int src);
 int minDistance(int dist[],bool sptSet[]);
-int printSolution(int dist[], int n);
+void printSolution(int dist[], int n);
 void print(int array[S][S]);
 int array[S][S];
 
 int main(){
 	grafOlustur();
-	print(array);
+	//print(array);
 	optimalYolBul(array, 0);
 	return 0;
 }
@@ -26,7 +26,6 @@ void grafOlustur(){
  	fstream file;
 	string input="";
 	file.open("YolBilgisi.txt");
-	
 	while(file){
 		
 		getline(file,input,',');
@@ -63,9 +62,8 @@ void print(int array[11][11]){
 
 void optimalYolBul(int graph[S][S] , int src){
 	
-	int dist[S];
+    int dist[S];
 	bool sptSet[S];
-
 	for (int i=0 ; i<S;i++){
 		dist[i] = __INT_MAX__;
 		sptSet[i]=false;
@@ -73,17 +71,19 @@ void optimalYolBul(int graph[S][S] , int src){
 
 	dist[src]=0;
 
-	for(int count=0;count<S-1;count++){
+	for(int count=0;count<S;count++){
 		int u = minDistance(dist,sptSet);
 		sptSet[u]=true;
+        
 		
 		for(int t = 0; t < S; t++)
 		{
 			if(!sptSet[t] && graph[u][t] && dist[u] != __INT_MAX__
 				&& dist[u]+graph[u][t]< dist[t] ){
 					dist[t] = dist[u] + graph[u][t];
+                    cout<<t<<"->"<<dist[t]<<endl;
 			}
-			printSolution(dist ,S);
+			//printSolution(dist ,S);
 		}
 		
 	}
@@ -91,7 +91,7 @@ void optimalYolBul(int graph[S][S] , int src){
 
 }
 
-int printSolution(int dist[], int n){
+void printSolution(int dist[], int n){
 	cout<<"Dugümlerin ana kaynağa olna uzakığı"<<endl;
 	
 	for(int i = 0; i < n; i++)
@@ -103,15 +103,15 @@ int printSolution(int dist[], int n){
 
 int minDistance(int dist[],bool sptSet[]) {
 
-	int min = __INT_MAX__ , min_index;
-
-	
+	int min = __INT_MAX__ ;
+    int minIndex;
+    
 	for(int i = 0; i < 11; i++)
 	{
 		if(sptSet[i]==false && dist[i] <= min){
 			min=dist[i];
-			min_index=i;	
+			minIndex=i;	
 		}
 	}
-
+    return minIndex;
 }
