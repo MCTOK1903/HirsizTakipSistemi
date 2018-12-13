@@ -7,16 +7,19 @@ using namespace std;
 #define EBS 0x7FFFFFFF;
 
 void grafOlustur();
-void optimalYolBul(int graph[S][S] , int src);
+void optimalYol(int graph[S][S] , int src);
+void optimalYolBul();
 int minDistance(int dist[],bool sptSet[]);
-void printSolution(int dist[], int n);
+void printSolution(int dist[], int n, int src);
+void hirsizGuzergah();
 void print(int array[S][S]);
 int array[S][S];
 
 int main(){
 	grafOlustur();
 	//print(array);
-	optimalYolBul(array, 0);
+	optimalYolBul();
+	hirsizGuzergah();
 	return 0;
 }
 
@@ -59,42 +62,46 @@ void print(int array[11][11]){
 		
 }
 
+void optimalYolBul(){
+	for(int h=0;h<S;h++){
+		optimalYol(array,h);
+	}
+}
 
-void optimalYolBul(int graph[S][S] , int src){
+
+void optimalYol(int graph[S][S] , int src){
+
     int dist[S];
 	bool sptSet[S];
 	for (int i=0 ; i<S;i++){
 		dist[i] = __INT_MAX__;
 		sptSet[i]=false;
 	}
+		dist[src]=0;
 
-	dist[src]=0;
-
-	for(int count=0;count<S-1;count++){
-		int u = minDistance(dist,sptSet);
-		sptSet[u]=true;
+		for(int count=0;count<S;count++){
+			int u = minDistance(dist,sptSet);
+			sptSet[u]=true;
         
 		
-		for(int t = 0; t < S; t++)
-		    if(!sptSet[t] && graph[u][t] && dist[u] != __INT_MAX__
-				&& dist[u]+graph[u][t] < dist[t] )
-					dist[t] = dist[u] + graph[u][t];
+			for(int t = 0; t < S; t++)
+		    	if(!sptSet[t] && graph[u][t] && dist[u] != __INT_MAX__
+					&& dist[u]+graph[u][t] < dist[t] )
+						dist[t] = dist[u] + graph[u][t];
                     //cout<<"dist"<<"["<<u<<"]"<<dist[u]<<endl;
                     //cout<<"graph"<<"["<<u<<"]"<<"["<<t<<"]"<<graph[u][t]<<endl;
                     //cout<<t<<"->"<<dist[t]<<endl;
             
-			
-		
-		
-	}
-    printSolution(dist ,S);
-
+	
+	    }
+   // printSolution(dist ,S, src);
+    
 }
 
-void printSolution(int dist[], int n){
-	cout<<"Dugümlerin ana kaynağa olna uzakığı"<<endl;
+void printSolution(int dist[], int n, int src){
+	cout<<"Dugümlerin "<<src<<" kaynağına olan uzakığı"<<endl;
 	
-	for(int i = 0; i < 11; i++)
+	for(int i = 0; i < n; i++)
 	{
 		cout<<i<<".Düğüm"<<dist[i]<<endl;
 	}
@@ -116,4 +123,19 @@ int minDistance(int dist[],bool sptSet[]) {
 		}
 	}
     return minIndex;
+}
+
+void hirsizGuzergah(){
+
+	fstream file2;
+	string input2;
+	file2.open("EsyaBilgileri.txt");
+	int c=0;
+	while(file2){
+
+		getline(file2,input2,',');
+		c++;
+		cout<<c<<"index->"<<input2<<endl;	
+		
+	}
 }
