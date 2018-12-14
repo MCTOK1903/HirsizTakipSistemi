@@ -24,33 +24,6 @@ int main(){
 }
 
 
-void grafOlustur(){
-	int x=0,y=0;
- 	fstream file;
-	string input="";
-	file.open("YolBilgisi.txt");
-	while(file){
-		
-		getline(file,input,',');
-			if(x<11){
-				//cout<<"x'in değeri"<<x<<endl;
-				//cout<<"y'nin değeri"<<y<<endl;
-				//cout<<input<<endl;
-				array[x][y]=stoi(input);
-					y++;
-				if(y%11==0){
-					x++;
-					y=0;
-				}
-			}		
-	}
-
-	/*for(int j=0;j<=10;j++){
-		for(int k=0;k<=10;k++){
-			cout<<array[j][k]<<",";
-		}*/
-	
-	file.close();
 }
 
 void print(int array[11][11]){
