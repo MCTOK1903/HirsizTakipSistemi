@@ -69,61 +69,6 @@ void optimalYolBul(){
 }
 
 
-void optimalYol(int graph[S][S] , int src){
-
-    int dist[S];
-	bool sptSet[S];
-	for (int i=0 ; i<S;i++){
-		dist[i] = __INT_MAX__;
-		sptSet[i]=false;
-	}
-		dist[src]=0;
-
-		for(int count=0;count<S;count++){
-			int u = minDistance(dist,sptSet);
-			sptSet[u]=true;
-        
-		
-			for(int t = 0; t < S; t++)
-		    	if(!sptSet[t] && graph[u][t] && dist[u] != __INT_MAX__
-					&& dist[u]+graph[u][t] < dist[t] )
-						dist[t] = dist[u] + graph[u][t];
-                    //cout<<"dist"<<"["<<u<<"]"<<dist[u]<<endl;
-                    //cout<<"graph"<<"["<<u<<"]"<<"["<<t<<"]"<<graph[u][t]<<endl;
-                    //cout<<t<<"->"<<dist[t]<<endl;
-            
-	
-	    }
-   // printSolution(dist ,S, src);
-    
-}
-
-void printSolution(int dist[], int n, int src){
-	cout<<"Dugümlerin "<<src<<" kaynağına olan uzakığı"<<endl;
-	
-	for(int i = 0; i < n; i++)
-	{
-		cout<<i<<".Düğüm"<<dist[i]<<endl;
-	}
-	
-}
-
-int minDistance(int dist[],bool sptSet[]) {
-
-	int min = __INT_MAX__ ;
-    int minIndex;
-    
-	for(int i = 0; i < 11; i++)
-	{
-		if(sptSet[i]==false && dist[i] <= min){
-			min=dist[i];
-            
-			minIndex=i;
-            //cout<<minIndex<<endl;	
-		}
-	}
-    return minIndex;
-}
 
 void hirsizGuzergah(){
 
