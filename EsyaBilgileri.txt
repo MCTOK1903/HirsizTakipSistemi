@@ -1,8 +1,0 @@
-M1,Televizyon,70,4000
-,M2,Telefon,15,5000
-,M3,Altin,5,20000
-,M4,Bisiklet,95,1000
-,M5,Resim Tablosu,50,50000
-,M6,Beyaz Esya,100,3000
-,M7,Heykel,85,30000
-,M8,Laptop,25,7000
